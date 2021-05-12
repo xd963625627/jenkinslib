@@ -52,7 +52,7 @@ pipeline {
                 timeout(time:30, unit:'MINUTES') { // 指定步骤的超时时间
                     script { // 指定运行的脚本
                         println("代码扫描")
-                        tools.PrintMes('this is mylib)
+                        tools.PrintMes('this is mylib')
                     }
                 }
             }
