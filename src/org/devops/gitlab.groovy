@@ -1,7 +1,7 @@
 package org.devops
 // 封装http请求
-def HttpReq(reqType,reqUrl,reqBody){
-    def gitServer = "http://192.168.3.134:17000/api/v4"
+def HttpReq(gitServer,reqType,reqUrl,reqBody){
+    //def gitServer = "http://192.168.3.134:17000/api/v4"
     withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabToken')]) {
       result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
                 httpMode: reqType, 
@@ -16,9 +16,9 @@ def HttpReq(reqType,reqUrl,reqBody){
 }
 
 // 更改提交状态
-def ChangeCommitStatus(projectId,commitSha,status){
+def ChangeCommitStatus(gitServer,projectId,commitSha,status){
     commitApi = "projects/${projectId}/statuses/${commitSha}?state=${status}"
-    response = HttpReq('POST',commitApi,'')
+    response = HttpReq(gitServer,'POST',commitApi,'')
     println(response)
     return response
 }
