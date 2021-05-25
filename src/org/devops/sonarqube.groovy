@@ -18,7 +18,6 @@ def SonarScan(projectName, projectDesc, projectPath) {
                   -Dsonar.sourceEncoding=UTF-8 \
                   -Dsonar.java.binaries=target/classes \
                   -Dsonar.java.test.binaries=target/test-classes \
-                  -Dsonar.java.surefire.report=target/surefire-reports  "
-                  #-Dsonar.branch.name=${CI_COMMIT_REF_NAME} -X "
+                  -Dsonar.java.surefire.report=target/surefire-reports
     """
 }
