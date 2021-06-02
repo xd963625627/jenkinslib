@@ -25,6 +25,7 @@ def SonarScan(projectName, projectDesc, projectPath) {
 
 // 使用jenkins插件
 def SonarScanInJenkins(projectName, projectDesc, projectPath) {
+  def qg = waitForQualityGate()
   // 使用jenkins指定的环境 可以不需要配置server、password、login
   withSonarQubeEnv("sonarqube-docker") {
     def sonarHome = "/home/software/sonar-scanner"
@@ -43,5 +44,8 @@ def SonarScanInJenkins(projectName, projectDesc, projectPath) {
                     -Dsonar.java.test.binaries=target/test-classes \
                     -Dsonar.java.surefire.report=target/surefire-reports
       """
+    if (qg.status != 'OK') {
+        error "Pipeline aborted due to quality gate failure: ${{qg.status}"
+    }
   }
 }
