@@ -2,7 +2,7 @@ package org.devops
 // 封装http请求
 def HttpReq(gitServer,reqType,reqUrl,reqBody){
     //def gitServer = "http://192.168.3.134:17000/api/v4"
-    withCredentials([string(credentialsId: 'gitlab-token', variable: 'gitlabToken')]) {
+    withCredentials([string(credentialsId: 'gitlab-token-2', variable: 'gitlabToken')]) {
       result = httpRequest customHeaders: [[maskValue: true, name: 'PRIVATE-TOKEN', value: "${gitlabToken}"]], 
                 httpMode: reqType, 
                 contentType: "APPLICATION_JSON",
