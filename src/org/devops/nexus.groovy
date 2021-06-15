@@ -32,7 +32,7 @@ def NexusUpload() {
 }
 // 使用Maven命令上传
 def MavenUpload() {
-    def mvnHome = tool "M2"
+    def mvnHome = tool "maven3.6.3"
     sh  """ 
         cd target/
         ${mvnHome}/bin/mvn deploy:deploy-file -Dmaven.test.skip=true  \
